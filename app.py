@@ -76,15 +76,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Logo centered above title - slightly bigger
-col_logo_left, col_logo_center, col_logo_right = st.columns([1, 4, 1])
-with col_logo_center:
+# Image in upper right corner - reduced by one-third (from 1000 to ~667)
+col_img_left, col_img_right = st.columns([4, 1])
+with col_img_right:
     try:
-        st.image("image.png", width=1000, use_container_width=False)
+        st.image("image.png", width=667, use_container_width=False)
     except (FileNotFoundError, Exception) as e:
         pass
 
-# Title centered over image - use full width columns for true centering
+# Title centered - use full width columns for true centering
 col_title_left, col_title_center, col_title_right = st.columns([1, 4, 1])
 with col_title_center:
     st.markdown("<h1 style='text-align: center; margin-top: 0; white-space: nowrap;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
