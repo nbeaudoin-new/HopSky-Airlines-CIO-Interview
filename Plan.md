@@ -37,8 +37,8 @@ This project implements a minimal chatbot web application.
 - [ ] Validate `OPENAI_API_KEY` exists in the environment (show error if missing)
 - [ ] Initialize LangChain ChatOpenAI model with `model="gpt-4o-mini"` and the API key from the environment
 - [ ] Create Streamlit UI:
-  - [ ] Set page title to "AeroVista CIO Bot" using `st.set_page_config()` with `initial_sidebar_state="collapsed"` to disable the sidebar
-  - [ ] Add a header displaying "AeroVista CIO Bot"
+  - [ ] Set page title to "HopSky CIO Bot" using `st.set_page_config()` with `initial_sidebar_state="collapsed"` to disable the sidebar
+  - [ ] Add a header displaying "HopSky CIO Bot"
   - [ ] Add text input for the user message
   - [ ] Add send button
   - [ ] Add display area for chat messages (using Streamlit session state for in-page display only)

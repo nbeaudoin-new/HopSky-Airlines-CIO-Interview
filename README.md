@@ -1,4 +1,4 @@
-# AeroVista Airlines CIO Bot
+# HopSky CIO Bot
 
 A conversational AI chatbot built with Streamlit and LangChain, designed to facilitate interviews with Chief Information Officers (CIOs) and their technical teams.
 
@@ -26,7 +26,7 @@ This application is part of the **Caltech CTME (Center for Technology and Manage
 ## Project Structure
 
 ```
-AeroVista-Airlines-CIO-Interview/
+HopSky-Airlines-CIO-Interview/
 ├── app.py                 # Main Streamlit application
 ├── prompt.txt             # System prompt configuration
 ├── requirements.txt       # Python dependencies
@@ -48,8 +48,8 @@ AeroVista-Airlines-CIO-Interview/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/nbeaudoin-new/AeroVista-Airlines-CIO-Interview.git
-   cd AeroVista-Airlines-CIO-Interview
+   git clone https://github.com/nbeaudoin-new/HopSky-Airlines-CIO-Interview.git
+   cd HopSky-Airlines-CIO-Interview
    ```
 
 2. **Install dependencies**

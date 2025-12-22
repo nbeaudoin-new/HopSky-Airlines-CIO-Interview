@@ -27,25 +27,29 @@ llm = ChatOpenAI(model="gpt-4o-mini", api_key=api_key, temperature=0.7)
 
 # Streamlit UI Configuration
 st.set_page_config(
-    page_title="AeroVista CIO Bot",
+    page_title="HopSky Airlines CIO Team",
     initial_sidebar_state="collapsed"
 )
 
-# Header
-st.header("AeroVista CIO Bot")
-
-# Display centered image with rounded edges
-try:
-    # Add CSS for rounded corners
-    st.markdown("""
-    <style>
+# Add CSS for styling
+st.markdown("""
+<style>
     .stImage > div > img {
         border-radius: 15px;
     }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns([1, 2, 1])
+    h1 {
+        text-align: center;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Centered Header
+st.markdown("<h1 style='text-align: center;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
+
+# Display centered image with rounded edges - larger size
+try:
+    # Use wider columns to make image take up more space
+    col1, col2, col3 = st.columns([0.5, 3, 0.5])
     with col2:
         st.image("chatbot_image.png", use_container_width=True)
 except FileNotFoundError:
@@ -55,13 +59,13 @@ except FileNotFoundError:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# User input - moved up, right after image
+user_input = st.chat_input("Type your message here...")
+
 # Display chat messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-
-# User input
-user_input = st.chat_input("Type your message here...")
 
 if user_input:
     # Append user message to session state
