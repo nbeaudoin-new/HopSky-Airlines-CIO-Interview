@@ -7,23 +7,35 @@ import os
 # Load environment variables
 load_dotenv()
 
-# Read system prompt from prompt.txt
-try:
-    with open("prompt.txt", "r") as f:
-        system_prompt = f.read().strip()
-except FileNotFoundError:
+# Validate OPENAI_API_KEY
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    st.error("Error: OPENAI_API_KEY not found in environment variables. Please set it in your .env file or Streamlit Cloud secrets.")
+    st.stop()
+
+@st.cache_resource
+def load_system_prompt():
+    """Load and cache the system prompt from prompt.txt"""
+    try:
+        with open("prompt.txt", "r") as f:
+            return f.read().strip()
+    except FileNotFoundError:
+        return None  # Return None to handle error outside cached function
+
+@st.cache_resource
+def initialize_llm():
+    """Initialize and cache the LangChain ChatOpenAI model"""
+    return ChatOpenAI(model="gpt-4o-mini", api_key=api_key, temperature=0.7)
+
+# Load system prompt (cached)
+system_prompt = load_system_prompt()
+if system_prompt is None:
     st.error("Error: prompt.txt file not found. Please create it with a system prompt.")
     st.stop()
     system_prompt = "You are a helpful assistant."
 
-# Validate OPENAI_API_KEY
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    st.error("Error: OPENAI_API_KEY not found in environment variables. Please set it in your .env file.")
-    st.stop()
-
-# Initialize LangChain ChatOpenAI model
-llm = ChatOpenAI(model="gpt-4o-mini", api_key=api_key, temperature=0.7)
+# Initialize LLM (cached)
+llm = initialize_llm()
 
 # Streamlit UI Configuration
 st.set_page_config(
@@ -42,7 +54,7 @@ st.markdown("""
     }
     .stChatInput {
         position: fixed;
-        bottom: 0;
+        bottom: 40px !important;
         left: 50%;
         transform: translateX(-50%);
         width: 70% !important;
@@ -50,26 +62,36 @@ st.markdown("""
         padding: 20px !important;
     }
     .stChatInput > div > div > textarea {
-        min-height: 120px !important;
+        min-height: 180px !important;
         font-size: 18px !important;
         padding: 15px !important;
         line-height: 1.6 !important;
     }
     .main .block-container {
-        padding-bottom: 200px;
+        padding-bottom: 260px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Header with image in upper right corner
+# Header with logo in upper right corner
 col_header_left, col_header_right = st.columns([3, 1])
 with col_header_left:
     st.markdown("<h1 style='text-align: center; margin-top: 0;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
 with col_header_right:
     try:
         st.image("image.png", width=150)
-    except FileNotFoundError:
-        pass  # Image not found, continue without it
+    except (FileNotFoundError, Exception) as e:
+        # Logo not found or error loading - continue without it
+        pass
+
+# Large centered image 2 - much bigger
+col_img_left, col_img_center, col_img_right = st.columns([0.3, 3, 0.3])
+with col_img_center:
+    try:
+        st.image("image 2.png", use_container_width=True)
+    except (FileNotFoundError, Exception) as e:
+        # Image not found or error loading - continue without it
+        pass
 
 # Initialize session state for messages
 if "messages" not in st.session_state:
@@ -104,12 +126,17 @@ if user_input:
     # Get response from LLM
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = llm.invoke(messages)
-            assistant_response = response.content
-            
-            # Display assistant response
-            st.markdown(assistant_response)
-    
-    # Append assistant response to session state
-    st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+            try:
+                response = llm.invoke(messages)
+                assistant_response = response.content
+                
+                # Display assistant response
+                st.markdown(assistant_response)
+                
+                # Append assistant response to session state
+                st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+            except Exception as e:
+                error_message = f"Sorry, I encountered an error: {str(e)}. Please try again."
+                st.error(error_message)
+                st.session_state.messages.append({"role": "assistant", "content": error_message})
 
