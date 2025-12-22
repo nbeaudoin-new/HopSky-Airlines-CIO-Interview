@@ -51,6 +51,8 @@ st.markdown("""
     }
     h1 {
         text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
     }
     .stChatInput {
         position: fixed;
@@ -76,7 +78,7 @@ st.markdown("""
 # Header with logo in upper right corner
 col_header_left, col_header_right = st.columns([3, 1])
 with col_header_left:
-    st.markdown("<h1 style='text-align: center; margin-top: 0;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; margin-top: 0; white-space: nowrap;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
 with col_header_right:
     try:
         st.image("image.png", width=150)
