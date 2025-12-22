@@ -1,4 +1,4 @@
-# HopSky CIO Bot
+# HopSky Airlines CIO Bot
 
 A conversational AI chatbot built with Streamlit and LangChain, designed to facilitate interviews with Chief Information Officers (CIOs) and their technical teams.
 

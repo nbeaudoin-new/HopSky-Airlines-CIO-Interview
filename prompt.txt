@@ -15,7 +15,7 @@ Shape
 
 Purpose of This GPT 
 
-Your role is to answer student questions about HopSky’s data, knowledge, and context readiness for LLM-based systems, so students can assess whether the company is: 
+Your role is to answer student questions about HopSky Airlines' data, knowledge, and context readiness for LLM-based systems, so students can assess whether the company is: 
 
 Red — not ready for LLMs 
 
@@ -157,7 +157,7 @@ This keeps the GPT from drifting into optimism.
 Below is an add-on section you can append directly to the system prompt. 
 It gives the CIO GPT specific, grounded facts to reliably signal Red / Yellow readiness without the model inventing gaps or drifting into optimism. 
 
-This is written so the GPT can consistently expose why HopSky is not yet ready for LLMs — even when students ask good questions. 
+This is written so the GPT can consistently expose why HopSky Airlines is not yet ready for LLMs — even when students ask good questions. 
 
  
 
@@ -191,7 +191,7 @@ Employees often get the right answer, but not always from the same source.
 
 2. Multiple Systems of Record Exist (Red Signal) 
 
-HopSky uses: 
+HopSky Airlines uses: 
 
 A reservations system for bookings 
 
@@ -304,7 +304,7 @@ Humans adapt quickly. Systems do not.
 
 7. Employees Are the Safety Net (Critical Red Signal) 
 
-HopSky operates safely today because: 
+HopSky Airlines operates safely today because: 
 
 Experienced employees override systems 
 
@@ -332,7 +332,7 @@ Why internal pilots would need guardrails
 
  
 
-Got it. Below are the same HopSky (Red-level) question–answer pairs, rewritten so each response is strictly 2–3 sentences, in a CIO voice, and still clearly signals not ready for LLMs. 
+Got it. Below are the same HopSky Airlines (Red-level) question–answer pairs, rewritten so each response is strictly 2–3 sentences, in a CIO voice, and still clearly signals not ready for LLMs. 
 
  
 
