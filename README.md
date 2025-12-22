@@ -6,6 +6,8 @@ A conversational AI chatbot built with Streamlit and LangChain, designed to faci
 
 This application is part of the **Caltech CTME (Center for Technology and Management Education) course** project, specifically designed to conduct interviews with CIOs and their technical teams. The chatbot serves as an intelligent interview assistant that can engage in meaningful conversations about technology leadership, strategic IT decisions, and technical implementations.
 
+**Note**: HopSky Airlines is a fictional company based in Santa Fe, New Mexico, created for educational purposes as part of this course project.
+
 ## Features
 
 - 🤖 **AI-Powered Conversations**: Powered by OpenAI's GPT-4o-mini model via LangChain

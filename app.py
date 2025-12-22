@@ -40,32 +40,48 @@ st.markdown("""
     h1 {
         text-align: center;
     }
+    .stChatInput {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70% !important;
+        max-width: 900px !important;
+        padding: 20px !important;
+    }
+    .stChatInput > div > div > textarea {
+        min-height: 120px !important;
+        font-size: 18px !important;
+        padding: 15px !important;
+        line-height: 1.6 !important;
+    }
+    .main .block-container {
+        padding-bottom: 200px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Centered Header
-st.markdown("<h1 style='text-align: center;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
-
-# Display centered image with rounded edges - larger size
-try:
-    # Use wider columns to make image take up more space
-    col1, col2, col3 = st.columns([0.5, 3, 0.5])
-    with col2:
-        st.image("chatbot_image.png", use_container_width=True)
-except FileNotFoundError:
-    pass  # Image not found, continue without it
+# Header with image in upper right corner
+col_header_left, col_header_right = st.columns([3, 1])
+with col_header_left:
+    st.markdown("<h1 style='text-align: center; margin-top: 0;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
+with col_header_right:
+    try:
+        st.image("image.png", width=150)
+    except FileNotFoundError:
+        pass  # Image not found, continue without it
 
 # Initialize session state for messages
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# User input - moved up, right after image
-user_input = st.chat_input("Type your message here...")
-
 # Display chat messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+
+# Large centered prompt box - Streamlit's chat_input is already at bottom, CSS handles centering
+user_input = st.chat_input("Type your message here...")
 
 if user_input:
     # Append user message to session state
