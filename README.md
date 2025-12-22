@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="image.png" alt="HopSky Airlines Logo" width="300">
+</div>
+
 # HopSky Airlines CIO Bot
 
 A conversational AI chatbot built with Streamlit and LangChain, designed to facilitate interviews with Chief Information Officers (CIOs) and their technical teams.
