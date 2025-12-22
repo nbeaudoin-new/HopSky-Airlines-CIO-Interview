@@ -75,8 +75,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Logo in upper right corner - positioned further right, 3x bigger
-col_logo_left, col_logo_right = st.columns([10, 1])
+# Logo in upper right corner - positioned way up and to the right, 3x bigger
+col_logo_left, col_logo_right = st.columns([20, 1])
 with col_logo_right:
     try:
         st.image("image.png", width=450)
@@ -84,8 +84,8 @@ with col_logo_right:
         # Logo not found or error loading - continue without it
         pass
 
-# Title centered over the main image
-col_title_left, col_title_center, col_title_right = st.columns([0.5, 3, 0.5])
+# Title centered over the main image - full width columns ensure centering regardless of logo
+col_title_left, col_title_center, col_title_right = st.columns([1, 3, 1])
 with col_title_center:
     st.markdown("<h1 style='text-align: center; margin-top: 0; white-space: nowrap;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
 
