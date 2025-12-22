@@ -52,7 +52,8 @@ st.markdown("""
     h1 {
         text-align: center;
         white-space: nowrap;
-        overflow: hidden;
+        overflow: visible !important;
+        width: 100%;
     }
     .stChatInput {
         position: fixed;
@@ -75,17 +76,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Logo in upper right corner - positioned way up and to the right, 3x bigger
-col_logo_left, col_logo_right = st.columns([20, 1])
+# Logo in upper right - use wider right column to accommodate 450px logo
+col_logo_left, col_logo_right = st.columns([12, 3])
 with col_logo_right:
     try:
-        st.image("image.png", width=450)
+        st.image("image.png", width=450, use_container_width=False)
     except (FileNotFoundError, Exception) as e:
-        # Logo not found or error loading - continue without it
         pass
 
-# Title centered over the main image - full width columns ensure centering regardless of logo
-col_title_left, col_title_center, col_title_right = st.columns([1, 3, 1])
+# Title centered over image - use full width columns for true centering
+col_title_left, col_title_center, col_title_right = st.columns([1, 4, 1])
 with col_title_center:
     st.markdown("<h1 style='text-align: center; margin-top: 0; white-space: nowrap;'>HopSky Airlines CIO Team</h1>", unsafe_allow_html=True)
 
