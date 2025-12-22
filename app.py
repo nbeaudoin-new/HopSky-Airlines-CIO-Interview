@@ -34,6 +34,23 @@ st.set_page_config(
 # Header
 st.header("AeroVista CIO Bot")
 
+# Display centered image with rounded edges
+try:
+    # Add CSS for rounded corners
+    st.markdown("""
+    <style>
+    .stImage > div > img {
+        border-radius: 15px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("chatbot_image.png", use_container_width=True)
+except FileNotFoundError:
+    pass  # Image not found, continue without it
+
 # Initialize session state for messages
 if "messages" not in st.session_state:
     st.session_state.messages = []
