@@ -70,7 +70,8 @@ st.markdown("""
         padding: 15px !important;
         line-height: 1.6 !important;
     }
-    .main {
+    section[data-testid="stMain"] {
+        height: 100vh;
         overflow-y: auto !important;
     }
     .main .block-container {
