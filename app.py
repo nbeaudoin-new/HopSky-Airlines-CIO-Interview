@@ -70,8 +70,11 @@ st.markdown("""
         padding: 15px !important;
         line-height: 1.6 !important;
     }
+    .main {
+        overflow-y: auto !important;
+    }
     .main .block-container {
-        padding-bottom: 260px;
+        padding-bottom: 350px;
     }
 </style>
 """, unsafe_allow_html=True)
