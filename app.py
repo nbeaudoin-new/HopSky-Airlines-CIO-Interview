@@ -77,17 +77,10 @@ st.markdown("""
     .main .block-container {
         padding-bottom: 350px;
     }
-    /* Add spacing after assistant messages */
-    div[data-testid="stChatMessage"] {
-        margin-bottom: 0.5em !important;
-    }
-    /* Extra spacing specifically after assistant messages */
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatar"]) ~ div {
-        margin-top: 2em !important;
-    }
-    /* Add spacing to elements that come after assistant chat messages */
-    .element-container:has(+ .element-container .stChatInput) {
+    /* Add extra spacing after assistant chat messages */
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatar"]) {
         margin-bottom: 3em !important;
+        padding-bottom: 1em !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -124,7 +117,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
     # Add two blank lines after assistant messages for spacing (outside chat message container)
     if message["role"] == "assistant":
-        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<div style='height: 3em;'></div>", unsafe_allow_html=True)
 
 # Large centered prompt box - Streamlit's chat_input is already at bottom, CSS handles centering
 user_input = st.chat_input("Type your message here...")
@@ -159,10 +152,10 @@ if user_input:
                 
                 # Append assistant response to session state
                 st.session_state.messages.append({"role": "assistant", "content": assistant_response})
-    # Add two blank lines after assistant response for spacing (outside chat message container)
-    st.markdown("<br><br>", unsafe_allow_html=True)
             except Exception as e:
                 error_message = f"Sorry, I encountered an error: {str(e)}. Please try again."
                 st.error(error_message)
                 st.session_state.messages.append({"role": "assistant", "content": error_message})
+    # Add two blank lines after assistant response for spacing (outside chat message container)
+    st.markdown("<div style='height: 3em;'></div>", unsafe_allow_html=True)
 
