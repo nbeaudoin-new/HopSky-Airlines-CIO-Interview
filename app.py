@@ -77,6 +77,14 @@ st.markdown("""
     .main .block-container {
         padding-bottom: 350px;
     }
+    /* Add spacing after assistant messages */
+    div[data-testid="stChatMessage"]:nth-child(even) {
+        margin-bottom: 3em !important;
+    }
+    /* Alternative: target assistant messages more specifically */
+    .stChatMessage:has(> div > div[data-testid="stChatMessageAvatar"] > div > svg) {
+        margin-bottom: 3em !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -110,6 +118,9 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+        # Add two blank lines after assistant messages for spacing
+        if message["role"] == "assistant":
+            st.markdown("\n\n")
 
 # Large centered prompt box - Streamlit's chat_input is already at bottom, CSS handles centering
 user_input = st.chat_input("Type your message here...")
@@ -141,6 +152,8 @@ if user_input:
                 
                 # Display assistant response
                 st.markdown(assistant_response)
+                # Add two blank lines for spacing
+                st.markdown("\n\n")
                 
                 # Append assistant response to session state
                 st.session_state.messages.append({"role": "assistant", "content": assistant_response})
