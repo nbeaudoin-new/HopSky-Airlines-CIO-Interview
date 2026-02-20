@@ -78,11 +78,15 @@ st.markdown("""
         padding-bottom: 350px;
     }
     /* Add spacing after assistant messages */
-    div[data-testid="stChatMessage"]:nth-child(even) {
-        margin-bottom: 3em !important;
+    div[data-testid="stChatMessage"] {
+        margin-bottom: 0.5em !important;
     }
-    /* Alternative: target assistant messages more specifically */
-    .stChatMessage:has(> div > div[data-testid="stChatMessageAvatar"] > div > svg) {
+    /* Extra spacing specifically after assistant messages */
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatar"]) ~ div {
+        margin-top: 2em !important;
+    }
+    /* Add spacing to elements that come after assistant chat messages */
+    .element-container:has(+ .element-container .stChatInput) {
         margin-bottom: 3em !important;
     }
 </style>
@@ -118,9 +122,9 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-        # Add two blank lines after assistant messages for spacing
-        if message["role"] == "assistant":
-            st.markdown("\n\n")
+    # Add two blank lines after assistant messages for spacing (outside chat message container)
+    if message["role"] == "assistant":
+        st.markdown("<br><br>", unsafe_allow_html=True)
 
 # Large centered prompt box - Streamlit's chat_input is already at bottom, CSS handles centering
 user_input = st.chat_input("Type your message here...")
@@ -152,11 +156,11 @@ if user_input:
                 
                 # Display assistant response
                 st.markdown(assistant_response)
-                # Add two blank lines for spacing
-                st.markdown("\n\n")
                 
                 # Append assistant response to session state
                 st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+    # Add two blank lines after assistant response for spacing (outside chat message container)
+    st.markdown("<br><br>", unsafe_allow_html=True)
             except Exception as e:
                 error_message = f"Sorry, I encountered an error: {str(e)}. Please try again."
                 st.error(error_message)
